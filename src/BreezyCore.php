@@ -17,7 +17,6 @@ use Filament\Panel;
 use Filament\Support\Concerns\EvaluatesClosures;
 use Illuminate\Cache\Repository;
 use Illuminate\Contracts\Auth\Authenticatable;
-use Illuminate\Support\Arr;
 use Illuminate\Validation\Rules\Password;
 use Jeffgreco13\FilamentBreezy\Livewire\PersonalInfo;
 use Jeffgreco13\FilamentBreezy\Livewire\SanctumTokens;
@@ -191,14 +190,13 @@ class BreezyCore implements Plugin
 
     public function withoutMyProfileComponents(array|Closure $components)
     {
-        $this->ignoredMyProfileComponents = is_array($components) ? $components : $this->evaluate($components);
+        $this->ignoredMyProfileComponents = $components;
 
         return $this;
     }
 
     public function myProfileComponents(array $components)
     {
-
         $merged = [
             ...$components,
             ...$this->registeredMyProfileComponents,
